@@ -17,6 +17,7 @@
         home-manager.nixosModules.home-manager
         ./modules/user.nix
         ./modules/system.nix
+        ./modules/locale.nix
       ];
     };
   };
