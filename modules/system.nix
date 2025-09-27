@@ -23,16 +23,6 @@ with lib; {
         description = "Should we allow 'unfree' software (and firmware)";
       };
     };
-    hardware = {
-      nvidia = {
-        enable = mkEnableOption "Should we handle nvidia graphics cards";
-        open = mkOption {
-          type = types.bool;
-          default = true;
-          description = "Use the nvidia-open drivers";
-        };
-      };
-    };
   };
 
   config = mkMerge [
@@ -46,29 +36,5 @@ with lib; {
       hardware.cpu.amd.updateMicrocode = config.lamentos.system.allowUnfree;
       hardware.cpu.intel.updateMicrocode = config.lamentos.system.allowUnfree;
     }
-    (mkIf (config.lamentos.hardware.nvidia.enable == true) {
-      services.xserver.videoDrivers = ["nvidia"];
-      boot.initrd.kernelModules = ["nvidia"];
-      boot.blacklistedKernelModules = ["nouveau"];
-
-      boot.initrd.availableKernelModules = [
-        "nvidia"
-        "nvidia_modeset"
-        "nvidia_uvm"
-        "nvidia_drm"
-      ];
-
-      hardware.nvidia = {
-        modesetting.enable = true;
-        open = config.lamentos.hardware.nvidia.open;
-        nvidiaSettings = false;
-      };
-
-      home-manager.users.${config.lamentos.user.name}.home.sessionVariables = {
-        LIBVA_DRIVER_NAME = "nvidia";
-        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-        ELECTRON_OZONE_PLATFORM_HINT = "auto";
-      };
-    })
   ];
 }

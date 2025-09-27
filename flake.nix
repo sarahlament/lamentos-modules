@@ -18,6 +18,7 @@
         ./modules/user.nix
         ./modules/system.nix
         ./modules/locale.nix
+        ./modules/hardware.nix
       ];
     };
   };
