@@ -1,0 +1,28 @@
+scheme: "LamentOS"
+author: "Sarah Lament"
+# Base16 - LamentOS Theme
+base00: "200a2c" # default background
+base01: "200a2c" # flat theme
+base02: "301a3c" # selection background
+base03: "906aa0" # comments, invisibles, line highlighting
+base04: "b098c8" # dark foreground (e.g. status bars)
+base05: "c0a8d0" # default foreground
+base06: "c8b0d8" # light foreground
+base07: "d0b8e0" # light background (unused in dark themes)
+base08: "f09898" # variables, XML tags, markup link text, lists, diff deleted
+base09: "e0c080" # integers, boolean, constants, attributes, markup link url
+base0A: "b8e098" # classes, search text background
+base0B: "98d8b8" # strings, inherited class, markup code, diff inserted
+base0C: "98d0e8" # support, regular expressions, escape characters
+base0D: "b098f0" # functions, methods, headings
+base0E: "e098e8" # keywords, storage, selector, markup italic, diff changed
+# Base24 - LamentOS Theme Extension (status + domain + repurposed base0F)
+base0F: "d8a8f0" # REPURPOSED: neutral/metadata + delimiters/punctuation
+base10: "98d898" # STATUS: success/healthy (git clean, network connected, good battery >50%, exit 0, resources <70%)
+base11: "e0d088" # STATUS: warning/attention (git dirty, medium battery 20-50%, high resources 70-90%, slow exec, pending rebuild)
+base12: "e88888" # STATUS: error/critical (git conflicts, disconnected, low battery <20%, resources >90%, failed commands)
+base13: "98c8e8" # STATUS: info/special (notification count, git stash, nix-shell active, recording, VPN, containers)
+base14: "c8a8f8" # DOMAIN: active/focus (current workspace, active window, focused directory, foreground process)
+base15: "88e8e8" # DOMAIN: time/duration (clocks, timestamps, execution time, uptime displays)
+base16: "d0b080" # DOMAIN: git+dev context (branch names, venv, language versions, direnv indicators, container names)
+base17: "b0a8d8" # DOMAIN: system/hardware info (CPU/RAM/disk labels, hardware indicators, module names)

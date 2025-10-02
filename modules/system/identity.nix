@@ -27,14 +27,4 @@ with lib; {
       description = "Hostname for the system";
     };
   };
-
-  config = mkMerge [
-    {
-      system.stateVersion = config.lamentos.system.identity.stateVersion;
-
-      nixpkgs.hostPlatform = config.lamentos.system.identity.systemType;
-      nixpkgs.config.allowUnfree = config.lamentos.system.identity.allowUnfree;
-      networking.hostName = config.lamentos.system.identity.hostName;
-    }
-  ];
 }

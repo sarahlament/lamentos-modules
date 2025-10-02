@@ -7,10 +7,9 @@
       url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # We are using the upstream for PR #892 which introduces breaking changes
-    # including new configuration options, so we're going to use that here
+    # We use stylix so we can sucessfully set system-wide theming, such as fonts, cursors, and our custom base24 theme
     stylix = {
-      url = "github:make-42/stylix/matugen";
+      url = "github:nix-community/stylix/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
