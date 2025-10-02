@@ -24,11 +24,15 @@ with lib; {
       open = config.lamentos.graphics.nvidia.open;
     };
 
-    home-manager.users.${config.lamentos.user.core.name}.home.sessionVariables = {
-      # nvidia-specific environment variables
-      LIBVA_DRIVER_NAME = "nvidia";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      ELECTRON_OZONE_PLATFORM_HINT = "auto";
-    };
+    home-manager.sharedModules = [
+      {
+        home.sessionVariables = {
+          # nvidia-specific environment variables
+          LIBVA_DRIVER_NAME = "nvidia";
+          __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+          ELECTRON_OZONE_PLATFORM_HINT = "auto";
+        };
+      }
+    ];
   };
 }

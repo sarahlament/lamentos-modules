@@ -1,7 +1,7 @@
 inputs: {
   imports = [
-    ./system.nix # core system information
-    ./user.nix # core user information
+    ./system # core system information
+    ./user # core user information
     ./graphics # graphics settings
   ];
 }

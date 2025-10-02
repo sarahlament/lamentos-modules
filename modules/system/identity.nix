@@ -5,10 +5,10 @@
   ...
 }:
 with lib; {
-  options.lamentos.system.core = {
+  options.lamentos.system.identity = {
     stateVersion = mkOption {
       type = types.str;
-      default = "25.05";
+      default = "25.11";
       description = "The stateVersion we are using for the system. Unless you know what you're doing, DO NOT CHANGE THIS!";
     };
     systemType = mkOption {
@@ -30,12 +30,11 @@ with lib; {
 
   config = mkMerge [
     {
-      system.stateVersion = config.lamentos.system.core.stateVersion;
-      home-manager.users.${config.lamentos.user.core.name}.home.stateVersion = config.lamentos.system.core.stateVersion;
+      system.stateVersion = config.lamentos.system.identity.stateVersion;
 
-      nixpkgs.hostPlatform = config.lamentos.system.core.systemType;
-      nixpkgs.config.allowUnfree = config.lamentos.system.core.allowUnfree;
-      networking.hostName = config.lamentos.system.core.hostName;
+      nixpkgs.hostPlatform = config.lamentos.system.identity.systemType;
+      nixpkgs.config.allowUnfree = config.lamentos.system.identity.allowUnfree;
+      networking.hostName = config.lamentos.system.identity.hostName;
     }
   ];
 }

@@ -1,8 +1,10 @@
 {
+  description = "LamentOS Module System";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    # We choose to push nixos-unstable as well as 'unstable' home-manager
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # We are using the upstream for PR #892 which introduces breaking changes
