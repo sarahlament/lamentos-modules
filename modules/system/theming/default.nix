@@ -11,7 +11,7 @@ with lib; {
   ];
 
   config = mkMerge [
-    (mkIf config.lamentos.system.theming.enable {
+    (mkIf (config.lamentos.system.theming.enable) {
       stylix = {
         enable = true;
 

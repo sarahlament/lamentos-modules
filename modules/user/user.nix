@@ -33,4 +33,5 @@ with lib; {
     default = {};
     description = "User configurations for the system";
   };
+  options.lamentos.users.sudoNoPassword = mkEnableOption "Should sudo work without a password";
 }

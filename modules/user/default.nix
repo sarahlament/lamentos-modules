@@ -54,5 +54,7 @@ with lib; {
 
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
+    # This is in fact correct. sudoNoPasword defaults to false, which is what this needs to work correcrly, so we need the inverse of the option
+    security.sudo.wheelNeedsPassword = !(config.lamentos.users.sudoNoPassword);
   };
 }
