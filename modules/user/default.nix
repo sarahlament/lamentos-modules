@@ -4,7 +4,11 @@
   pkgs,
   ...
 }:
-with lib; {
+with lib; let
+  cfg = config.lamentos.user;
+  cfgs = config.lamentos.users;
+  syscfg = config.lamentos.system;
+in {
   imports = [
     ./user.nix # Multi-user system configuration
   ];
@@ -25,7 +29,7 @@ with lib; {
             shell = pkgs.${userConfig.shell};
           }
       )
-      config.lamentos.user;
+      cfg;
 
     # Enable required shell programs
     programs = mkMerge (
@@ -35,7 +39,7 @@ with lib; {
             ${userConfig.shell}.enable = true;
           }
       )
-      config.lamentos.user
+      cfg
     );
 
     # Configure home-manager for each user
@@ -47,14 +51,14 @@ with lib; {
             home.homeDirectory = "/home/${username}";
             programs.${userConfig.shell}.enable = true;
             home.shell.enableShellIntegration = true;
-            home.stateVersion = config.lamentos.system.identity.stateVersion;
+            home.stateVersion = syscfg.identity.stateVersion;
           }
       )
-      config.lamentos.user;
+      cfg;
 
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
     # This is in fact correct. sudoNoPasword defaults to false, which is what this needs to work correcrly, so we need the inverse of the option
-    security.sudo.wheelNeedsPassword = !(config.lamentos.users.sudoNoPassword);
+    security.sudo.wheelNeedsPassword = !(cfgs.sudoNoPassword);
   };
 }

@@ -4,12 +4,14 @@
   pkgs,
   ...
 }:
-with lib; {
+with lib; let
+  cfg = config.lamentos.shell;
+in {
   imports = [
     ./modernTools.nix # modern replacements for shell commands
   ];
   config = mkMerge [
-    (mkIf (config.lamentos.shell.modernTools.enable) {
+    (mkIf (cfg.modernTools.enable) {
       home-manager.sharedModules = [
         {
           home.shellAliases = {

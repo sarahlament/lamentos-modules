@@ -4,19 +4,21 @@
   pkgs,
   ...
 }:
-with lib; {
+with lib; let
+  cfg = config.lamentos.graphics;
+in {
   imports = [
     ./nvidia.nix # NVIDIA specific settings
   ];
 
   config = mkMerge [
-    (mkIf config.lamentos.graphics.nvidia.enable {
+    (mkIf cfg.nvidia.enable {
       services.xserver.videoDrivers = ["nvidia"];
       boot.initrd.kernelModules = ["nvidia"];
 
       hardware.nvidia = {
         modesetting.enable = true;
-        open = config.lamentos.graphics.nvidia.open;
+        open = cfg.nvidia.open;
       };
 
       home-manager.sharedModules = [

@@ -4,18 +4,20 @@
   pkgs,
   ...
 }:
-with lib; {
+with lib; let
+  cfg = config.lamentos.system.identity;
+in {
   imports = [
     ./identity.nix # System Identity settings
     ./theming # System level theming
   ];
 
   config = {
-    system.stateVersion = config.lamentos.system.identity.stateVersion;
+    system.stateVersion = cfg.stateVersion;
 
-    nixpkgs.hostPlatform = config.lamentos.system.identity.systemType;
-    nixpkgs.config.allowUnfree = config.lamentos.system.identity.allowUnfree;
-    networking.hostName = config.lamentos.system.identity.hostName;
+    nixpkgs.hostPlatform = cfg.systemType;
+    nixpkgs.config.allowUnfree = cfg.allowUnfree;
+    networking.hostName = cfg.hostName;
 
     networking.networkmanager.enable = mkDefault true;
   };
