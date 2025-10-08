@@ -58,7 +58,8 @@ in {
 
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
-    # This is in fact correct. sudoNoPasword defaults to false, which is what this needs to work correcrly, so we need the inverse of the option
+    # This is in fact correct. sudoNoPasword defaults to false, which is what this needs to work correcrly, so we need the inverse of the option. We set both, since if modernTools.useRustSudo is false sudo-rs isn't used at all
     security.sudo.wheelNeedsPassword = !(cfgs.sudoNoPassword);
+    security.sudo-rs.wheelNeedsPassword = !(cfgs.sudoNoPassword);
   };
 }

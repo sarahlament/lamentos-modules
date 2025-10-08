@@ -47,6 +47,9 @@ in {
           };
         }
       ];
+      # If we want to use sudo-rs, we must also disable regular sudo
+      security.sudo-rs.enable = cfg.modernTools.useRustSudo;
+      security.sudo.enable = !(cfg.modernTools.useRustSudo);
     })
   ];
 }
