@@ -29,14 +29,12 @@ with lib; {
 
     # Additional KDE applications for "it just works" experience
     environment.systemPackages = with pkgs; [
+      kdePackages.qtstyleplugin-kvantum # Work around for not finding kvantum?
       kdePackages.kcalc # Calculator
       kdePackages.filelight # Disk usage analyzer
       haruna # Video player
       kdePackages.discover # Software center
       kdePackages.partitionmanager # Disk partitioning
     ];
-
-    # Disable Qt theming - KDE Plasma 6 handles Qt apps natively
-    stylix.targets.qt.enable = false;
   };
 }
