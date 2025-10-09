@@ -5,10 +5,10 @@
   ...
 }:
 with lib; {
-  options.lamentos.desktop.plasma6 = {
+  options.lamentos.desktop.kde = {
     enable = mkEnableOption "Enable the plasma6 Desktop Environment";
   };
-  config = mkIf config.lamentos.desktop.plasma6.enable {
+  config = mkIf config.lamentos.desktop.kde.enable {
     xdg.portal = {
       enable = true;
       extraPortals = [pkgs.kdePackages.xdg-desktop-portal-kde];

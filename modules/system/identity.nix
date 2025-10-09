@@ -8,7 +8,7 @@ with lib; {
   options.lamentos.system.identity = {
     stateVersion = mkOption {
       type = types.str;
-      default = "25.11";
+      default = "25.05";
       description = "The stateVersion we are using for the system. Unless you know what you're doing, DO NOT CHANGE THIS!";
     };
     systemType = mkOption {

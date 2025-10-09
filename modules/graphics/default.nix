@@ -12,6 +12,21 @@ in {
   ];
 
   config = mkMerge [
+    {
+      assertions = [
+        {
+          assertion = cfg.vendor != null;
+          message = "So, we kinda need to know what graphics driver you need...";
+        }
+      ];
+      home-manager.sharedModules = [
+        {
+          home.sessionVariables = {
+            ELECTRON_OZONE_PLATFORM_HINT = "auto";
+          };
+        }
+      ];
+    }
     (mkIf (cfg.vendor == "nvidia") {
       services.xserver.videoDrivers = ["nvidia"];
       boot.initrd.kernelModules = ["nvidia"];
@@ -29,10 +44,10 @@ in {
         {
           home.sessionVariables = mkMerge [
             {
-              # nvidia-specific environment variables
+              # nvidia-specific enviro`nment variables
               LIBVA_DRIVER_NAME = "nvidia";
+              VDPAU_DRIVER = "nvidia";
               __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-              ELECTRON_OZONE_PLATFORM_HINT = "auto";
             }
             (mkIf cfg.nvidia.cuda.enable {
               CUDA_PATH = "${cfg.nvidia.cuda.package}";
@@ -44,8 +59,9 @@ in {
 
     (mkIf (cfg.vendor == "intel") {
       services.xserver.videoDrivers = ["modesetting"];
+      boot.initrd.kernelModules = ["i915"];
 
-      hardware.graphics.extraPackages = with pkgs; [
+      environment.systemPackages = with pkgs; [
         (
           if cfg.intel.vaapiDriver == "iHD"
           then intel-media-driver
@@ -69,7 +85,7 @@ in {
       services.xserver.videoDrivers = ["amdgpu"];
       boot.initrd.kernelModules = ["amdgpu"];
 
-      hardware.graphics.extraPackages = with pkgs; [
+      environment.systemPackages = with pkgs; [
         # Vulkan driver
         (mkIf (cfg.amd.vulkanDriver == "amdvlk") amdvlk)
 

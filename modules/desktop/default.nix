@@ -1,5 +1,5 @@
 inputs: {
   imports = [
-    ./kde.nix # Plasma6 enable option
+    ./kde.nix # KDE Desktop Environment
   ];
 }

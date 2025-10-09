@@ -23,6 +23,11 @@ with lib; {
           default = "zsh";
           description = "Which shell should the user use";
         };
+        isAdmin = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Whether this user should have admin rights";
+        };
         enable = mkOption {
           type = types.bool;
           default = true;

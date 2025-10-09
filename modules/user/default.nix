@@ -21,11 +21,8 @@ in {
           mkIf userConfig.enable {
             description = userConfig.fullName;
             isNormalUser = true;
-            extraGroups = [
-              "wheel"
-              "systemd-journal"
-              "input"
-            ];
+            initialHashedPassword = mkDefault "$6$p20S/Lmo4mac8WYC$LcJ1.Shd2nqNms10afnhD6//Nm3gn7HdHZlZwsNCx2bYFRC.iNyHU5vbRpo96FOV33JuMyxV32izMy8zW89mP1";
+            extraGroups = mkIf userConfig.isAdmin ["wheel" "systemd-journal"];
             shell = pkgs.${userConfig.shell};
           }
       )
