@@ -3,8 +3,8 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkIf mkMerge mkDefault;
   cfg = config.lamentos.system.theming;
   stylixhash = config.lib.stylix.colors.withHashtag;
 in {

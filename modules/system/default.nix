@@ -3,8 +3,8 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkDefault;
   cfg = config.lamentos.system.identity;
 in {
   imports = [

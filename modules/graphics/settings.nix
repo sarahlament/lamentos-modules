@@ -3,8 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; {
+}: let
+  inherit (lib) mkOption mkEnableOption types;
+in {
   options.lamentos.graphics = {
     vendor = mkOption {
       type = types.nullOr (types.enum [

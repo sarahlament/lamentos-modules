@@ -3,8 +3,8 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkIf mkMerge;
   cfg = config.lamentos.shell;
 in {
   imports = [

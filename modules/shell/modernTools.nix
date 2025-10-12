@@ -3,8 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; {
+}: let
+  inherit (lib) mkOption types;
+in {
   options.lamentos.shell.modernTools = {
     enable = mkOption {
       type = types.bool;

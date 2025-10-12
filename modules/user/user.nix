@@ -3,8 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; {
+}: let
+  inherit (lib) mkOption mkEnableOption types;
+in {
   options.lamentos.user = mkOption {
     type = types.attrsOf (types.submodule {
       options = {

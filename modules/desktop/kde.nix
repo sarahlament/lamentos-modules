@@ -3,8 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; {
+}: let
+  inherit (lib) mkEnableOption mkIf;
+in {
   options.lamentos.desktop.kde = {
     enable = mkEnableOption "Enable the plasma6 Desktop Environment";
   };

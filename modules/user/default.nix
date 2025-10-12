@@ -3,8 +3,8 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkIf mkMerge mkDefault mapAttrs mapAttrsToList;
   cfg = config.lamentos.user;
   cfgs = config.lamentos.users;
   syscfg = config.lamentos.system;
