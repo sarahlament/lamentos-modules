@@ -4,7 +4,8 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkOption types;
+  inherit (lib) mkOption types mkDefault;
+  cfg = config.lamentos.system.identity;
 in {
   options.lamentos.system.identity = {
     stateVersion = mkOption {
@@ -27,5 +28,15 @@ in {
       default = "nixos";
       description = "Hostname for the system";
     };
+  };
+
+  config = {
+    system.stateVersion = cfg.stateVersion;
+
+    nixpkgs.hostPlatform = cfg.systemType;
+    nixpkgs.config.allowUnfree = cfg.allowUnfree;
+    networking.hostName = cfg.hostName;
+
+    networking.networkmanager.enable = mkDefault true;
   };
 }

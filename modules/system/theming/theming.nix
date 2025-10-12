@@ -4,13 +4,20 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkOption types;
+  inherit (lib) mkOption mkMerge mkIf mkDefault types;
+  cfg = config.lamentos.system.theming;
 in {
   options.lamentos.system.theming = {
-    omp.enable = mkOption {
+    enable = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Should we provide a default theme across the system?";
+    };
+
+    useCustomTheme = mkOption {
       type = types.bool;
       default = config.lamentos.system.theming.enable;
-      description = "Should we use a shell prompt theme as well";
+      description = "Should we use our custom base24 theme across the system.";
     };
 
     fonts.monospace = mkOption {
@@ -64,9 +71,47 @@ in {
       default = {
         package = pkgs.numix-cursor-theme;
         name = "Numix-Cursor-Light";
-        size = 34;
+        size = 36;
       };
       description = "Cursor triplet for the system";
     };
   };
+
+  config = mkMerge [
+    (mkIf (cfg.enable) {
+      stylix = {
+        enable = true;
+        # If we are not using our custom theme, let's default to catppuccin-mocha
+        base16Scheme =
+          if cfg.useCustomTheme
+          then ./lamentos.yaml
+          else mkDefault "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+
+        fonts = {
+          monospace = {
+            package = cfg.fonts.monospace.package;
+            name = cfg.fonts.monospace.name;
+          };
+          sansSerif = {
+            package = cfg.fonts.sansSerif.package;
+            name = cfg.fonts.sansSerif.name;
+          };
+          serif = {
+            package = cfg.fonts.serif.package;
+            name = cfg.fonts.serif.name;
+          };
+          sizes = mkDefault {
+            applications = 14;
+            desktop = 12;
+          };
+        };
+
+        cursor = {
+          package = cfg.cursor.package;
+          name = cfg.cursor.name;
+          size = cfg.cursor.size;
+        };
+      };
+    })
+  ];
 }
