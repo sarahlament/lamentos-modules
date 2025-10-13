@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkOption types mkDefault;
+  inherit (lib) mkOption types mkDefault mkIf;
   cfg = config.lamentos.system.identity;
 in {
   options.lamentos.system.identity = {
@@ -28,6 +28,11 @@ in {
       default = "nixos";
       description = "Hostname for the system";
     };
+    enableZswap = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Use ZSwap instead of normal swap";
+    };
   };
 
   config = {
@@ -38,5 +43,12 @@ in {
     networking.hostName = cfg.hostName;
 
     networking.networkmanager.enable = mkDefault true;
+
+    boot.kernelParams = mkIf cfg.enableZswap [
+      "zswap.enabled=1"
+      "zswap.compressor=lz4"
+      "zswap.mox_pool_percent=20"
+      "zswap.shrinker_enabled=1"
+    ];
   };
 }
