@@ -140,20 +140,6 @@ Use `mkDefault` for any value users might reasonably override. Internal plumbing
 5. Test by rebuilding an actual system configuration
 6. Update README if user-facing
 
-### Working Style
-
-**Discuss before implementing**
-- When you spot an issue or improvement, explain what you found first
-- Present trade-offs and different approaches
-- Wait for direction before jumping into code
-- Exception: user explicitly asks to "just fix it" or "go ahead"
-- Note: "help me fix it" means collaborate, not implement - discuss first
-
-**Balance proactiveness**
-- Be proactive about identifying issues
-- Be measured about implementing fixes
-- Talk through implications before taking action
-
 ## Flake Input Management
 
 ### Our Position

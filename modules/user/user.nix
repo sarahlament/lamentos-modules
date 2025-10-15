@@ -38,6 +38,11 @@ in {
           default = true;
           description = "Whether to create and configure this user";
         };
+        hashedPasswordFile = mkOption {
+          type = types.nullOr types.path;
+          default = null;
+          description = "Should I use your personal hashed password instead?";
+        };
       };
     });
     default = {};
@@ -53,7 +58,8 @@ in {
           mkIf userConfig.enable {
             description = userConfig.fullName;
             isNormalUser = true;
-            initialHashedPassword = mkDefault "$6$p20S/Lmo4mac8WYC$LcJ1.Shd2nqNms10afnhD6//Nm3gn7HdHZlZwsNCx2bYFRC.iNyHU5vbRpo96FOV33JuMyxV32izMy8zW89mP1";
+            initialHashedPassword = mkIf (userConfig.hashedPasswordFile == null) (mkDefault "$6$p20S/Lmo4mac8WYC$LcJ1.Shd2nqNms10afnhD6//Nm3gn7HdHZlZwsNCx2bYFRC.iNyHU5vbRpo96FOV33JuMyxV32izMy8zW89mP1");
+            hashedPasswordFile = userConfig.hashedPasswordFile;
             extraGroups = mkIf userConfig.isAdmin ["wheel" "systemd-journal"];
             shell = pkgs.${userConfig.shell};
           }
